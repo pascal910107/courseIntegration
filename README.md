@@ -5,5 +5,5 @@
 cp .env.example .env
 
 
-## Download pnpm
-npm install -g pnpm
+## Start the system
+docker-compose up --build
