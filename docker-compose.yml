@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  backend:
+    build: backend
+    command: "python run.py"
+    volumes:
+      - ./backend:/app/backend
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_APP=app
+      - FLASK_DEBUG=1
+      - USER_NAME=${USER_NAME}
+      - PASSWORD=${PASSWORD}
+      - YEAR=${YEAR}
+      - SEMESTER=${SEMESTER}
+  frontend:
+    build: frontend
+    command: "npm run dev"
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+    ports:
+      - 3000:3000
+      - 24678:24678
+    environment: 
+      - CHOKIDAR_USEPOLLING=true
+      - HOST=0.0.0.0
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - /mongodb:/app/mongodb
+    ports:
+      - "27017:27017"

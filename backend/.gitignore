@@ -1,0 +1,4 @@
+venv
+app/images
+app/test.py
+app/db.py

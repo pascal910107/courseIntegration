@@ -1,0 +1,9 @@
+BeautifulSoup4
+selenium
+matplotlib
+opencv-python
+webdriver-manager
+pytesseract
+flask
+flask-cors
+pymongo
