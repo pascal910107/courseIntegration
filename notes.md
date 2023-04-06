@@ -33,10 +33,10 @@ environment:
 app.run(host='0.0.0.0')
 
 ### pymongo in docker連線要使用container_name代替地址
-client = MongoClient("mongodb://classrushsystem-mongodb-1:27017/")
+client = MongoClient("mongodb://courseintegration-mongodb-1:27017/")
 
 ### server端渲染跟client端渲染
-baseUrl: process.server ? 'http://classrushsystem-backend-1:5000/api/' : 'http://localhost:5000/api/'
+baseUrl: process.server ? 'http://courseintegration-backend-1:5000/api/' : 'http://localhost:5000/api/'
 
 ### useFetch not compatible with node18
 instead node18 with node16
@@ -52,3 +52,12 @@ str()
 
 ### package.json修改後沒有成功引入，container要刪掉不能留快取
 docker-compose down
+
+### Nitro不會自己關掉
+docker-compose down
+
+### CORS跨域問題可能是因為忘記加/api/
+http://127.0.0.1:5000/api/
+
+### 網頁控制台顯示有問題，不一定是跨域問題，後端沒處理好他一樣顯示跨域問題
+看terminal日誌
