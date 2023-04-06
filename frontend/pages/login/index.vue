@@ -35,22 +35,29 @@
     const error = ref(0)
 
     const login = async () => {
-        const { data: response }: any = await useFetch($baseUrl + 'login', {
-            method: 'POST',
-            body: {
-                id: id.value,
-                password: password.value
-            }
+      try {
+        const { data: response }: any = await useFetch('login', {
+          baseURL: $baseUrl,
+          method: 'POST',
+          body: {
+            id: id.value,
+            password: password.value
+          }
         })
         result.value = response
+        
         if (result.value == 'false') {
           error.value = 1
         } else if (result.value == null) {
-          //後端沒開
+          //後端沒開或有問題，檢查日誌
         } else{
           error.value = 0
           navigateTo('/')
         }
+      } catch (error) {
+        console.log(error)
+      }
+        
     }
 
     onMounted(() => {
